@@ -10,6 +10,8 @@ android {
         minSdk 21
         compileSdk 30
         targetSdk 30
+        versionCode 8
+        versionName "1.0.8"
     }
 
     buildTypes {
@@ -33,4 +35,18 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.google.code.gson:gson:2.8.6'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.jitpack'
+                artifactId = 'logsloth'
+                version = '1.0.8'
+            }
+        }
+    }
 }
