@@ -1,54 +1,54 @@
 # LogSloth
 <img width="200" src="https://user-images.githubusercontent.com/5696570/132941847-3193d9c9-3675-4d04-bb59-ac3eb901193c.png"/>
 
-## Introduction
-- Utility to help analyze execution structure and performance bottleneck of complex applications by using pure and simple text log.
+## 소개
+- 순수하고 간단한 텍스트로그를 활용해서, 복잡한 어플리케이션의 실행구조분석, 성능병목분석을 돕는 유틸리티.
 
-## Target User
-- Analysis of execution flow and call relationship of new project
-- Detailed analysis of performance by section
+## 사용대상
+- 신규프로젝트의 실행흐름, 호출관계 분석
+- 구간별 성능 상세분석
 
-## Additional usage scenarios
-- Analyze the code in detail by lying down and pressing the arrow keys with the iPad
-- Dynamic document that feels like recording the debugging screen while taking a breakpoint
+## 추가적인 사용 시나리오
+- 누워서 아이패드로 방향키만 눌러서 코드 상세 분석
+- 정지점 찍어가며 디버깅 하는 화면을 녹화한것 같은 느낌의 동적 문서 
 
-## Includings
-- Text Logger Library
+## 포함내용
+- 텍스트 로거
   - python
   - java/kotlin
   - cpp
-- Log Viewer
+- 로그 뷰어
   - web
   - powershell
 
-## Text log's essentials + alpha
+## 텍스트 로그의 필수요소 + alpha
 
-- Essentials
-  - Timestamp: Year Month Day + Hour Minute Seconds + Milliseconds
-  - PID
-  - TID
-  - free text
+- 필수요소
+	- 타임스탬프 : 연월일 + 시분초 + 밀리세컨드
+	- PID
+	- TID
+	- 자유 텍스트
 - alpha
-  - file name
-  - line number
-  - function name
-  - thread name
-  - Scope entry/exit
-  - Thread work request/work reception
-  - Variable name/variable value
+	- 파일명
+	- 라인번호
+	- 함수이름
+	- 스레드 이름
+	- 스코프 진입/탈출
+	- 스레드 작업요청/ 작업수신
+	- 변수명/변수값
 
 <br/>
 <br/>
 <br/>
 
-## Logger Installation, Writting logs, Collecting logs
+## Logger 설치, 로그기록, 로그수집
 
 ### python
 
-- Installation
+- 설치
   - `pip install logsloth`
 
-- Writting logs
+- 로그기록
 ```python
 import logsloth
 
@@ -69,7 +69,7 @@ if __name__ == '__main__':
     LogSlothTest().test_basic()
 ```
 
-- Collecting logs
+- 로그확인
 ![](https://i.imgur.com/XdEWWci.png)
 
 <br/>
@@ -81,7 +81,7 @@ if __name__ == '__main__':
 ### java, kotlin
 [![](https://jitpack.io/v/HyundongHwang/logsloth.svg)](https://jitpack.io/#HyundongHwang/logsloth)
 
-- Installation
+- 설치
 
 ```groovy
 repositories {
@@ -93,7 +93,7 @@ dependencies {
 }
 ```
 
-- Writting logs
+- 로그기록
 
 ```kotlin
 fun _00_simple_LogSloth() = logsloth {
@@ -106,8 +106,7 @@ fun _00_simple_LogSloth() = logsloth {
 }
 ```
 
-- Collecting logs
-
+- 로그확인
 ```text
 $ adb logcat -c
 $ adb logcat | grep --line-buffered LOGSLOTH
@@ -129,13 +128,13 @@ $ adb logcat | grep --line-buffered LOGSLOTH
 
 ### c++
 
-- Installation
+- 설치
 
 ```cpp
 #include "/home/hhd/project/logsloth/cpp-sample/src/logsloth.h"
 ```
 
-- Writting logs
+- 로그작성
 
 ```cpp
 #include "/home/hhd/project/logsloth/cpp-sample/src/logsloth.h"
@@ -180,7 +179,7 @@ void Job2()
 
 ```
 
-- Collecting logs
+- 로그확인
 ```text
 [==========] Running 1 test from 1 test case.
 [----------] Global test environment set-up.
@@ -265,11 +264,11 @@ void Job2()
 
 ### powershell
 
-- Installation
+- 설치
 
 `Install-Module -Name logsloth`
 
-- Analysing logs
+- 분석
 
 `PS> cat my.log | logsloth`
 
@@ -290,8 +289,11 @@ void Job2()
 <br/>
 
 
-## github integration demoes
-  - Analysing logs demo
+## github 연동 데모
+  - 로그분석 데모
     - [![Video Label](http://img.youtube.com/vi/wbvcmzYpA98/0.jpg)](https://youtu.be/wbvcmzYpA98?t=0s)
-  - Code review demo
+  - 코드리뷰 데모
     - [![Video Label](http://img.youtube.com/vi/QkwRIX8SppI/0.jpg)](https://youtu.be/QkwRIX8SppI?t=0s)
+
+
+---
