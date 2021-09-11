@@ -17,5 +17,5 @@ class LogSlothTest:
 
 
 if __name__ == '__main__':
-    logsloth.init(show_color=False)
+    logsloth.init(show_color=True)
     LogSlothTest().test_basic()
