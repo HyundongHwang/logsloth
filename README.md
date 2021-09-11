@@ -272,7 +272,7 @@ void Job2()
 
 `PS> cat my.log | logsloth`
 
-![](https://i.imgur.com/1nPRD19.png)
+<img width="600" src="https://i.imgur.com/1nPRD19.png"/>
 
 
 <br/>
