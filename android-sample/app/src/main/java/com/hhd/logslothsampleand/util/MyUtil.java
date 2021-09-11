@@ -27,12 +27,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.HashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
 
-import io.reactivex.Scheduler;
-import io.reactivex.schedulers.Schedulers;
 
 public class MyUtil {
     private static final String TAG = MyUtil.class.getSimpleName();
@@ -110,17 +105,6 @@ public class MyUtil {
         }
 
         return false;
-    }
-
-    public static Scheduler newNamedScheduler(final String name) {
-        ExecutorService threadPool = Executors.newCachedThreadPool(new ThreadFactory() {
-            @Override
-            public Thread newThread(Runnable runnable) {
-                return new Thread(runnable, name);
-            }
-        });
-        Scheduler scheduler = Schedulers.from(threadPool);
-        return scheduler;
     }
 
     private static Gson _gson = null;
