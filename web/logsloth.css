@@ -1,0 +1,147 @@
+/********************************************************************************
+* for highlightjs
+********************************************************************************/
+.hljs-ln-numbers {
+    text-align: center;
+    color: #ccc;
+    border-right: 1px solid #999;
+    vertical-align: top;
+    padding-right: 5px;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.hljs-ln-code {
+    padding-left: 10px;
+}
+
+code {
+    white-space: pre-wrap;
+    overflow: auto;
+}
+
+/********************************************************************************/
+
+
+body {
+    display: grid;
+    grid-template-columns: 50fr 50fr;
+    grid-template-rows: min-content min-content auto;
+    grid-gap: 10px;
+    font-family: D2Coding, 'Courier New', Courier, monospace;
+}
+
+#panel_top {
+    grid-column: 1/3;
+    grid-row: 1;
+    font-family: D2Coding, 'Courier New', Courier, monospace;
+}
+
+#panel_left_top {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+#panel_right_top {
+    grid-column: 2;
+    grid-row: 2;
+    position: relative;
+    font-size: 10px;
+}
+
+#panel_left {
+    grid-column: 1;
+    grid-row: 3;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    position: relative;
+    font-size: 15px;
+    position: relative;
+}
+
+#panel_right {
+    grid-column: 2;
+    grid-row: 3;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    position: relative;
+    font-size: 15px;
+}
+
+#code_src {
+    width: 200%;
+}
+
+#panel_top  {
+    margin: 5px 5px 0 0;
+    font-size: 15px;
+}
+
+#btn_back, #btn_forward {
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+}
+
+#txt_log_line_number {
+    width: 100px;
+    height: 30px;
+    font-size: 25px;
+}
+
+#div_git_repo {
+    display: grid;
+    grid-template-columns: auto 100fr auto;
+    grid-gap: 5px;
+}
+
+#label_git_repo {
+    grid-column: 1;
+    align-self: center;
+}
+
+#txt_git_repo_array {
+    grid-column: 2;
+}
+
+#btn_apply_oss_repo {
+    grid-column: 3;
+}
+
+#btn_upload_log_file {
+    display: none;
+}
+
+.div_overlay {
+    position: absolute;
+    pointer-events:none;
+    left: 0;
+    top: 0;
+}
+
+.call_rope_normal {
+    stroke-dasharray: 3px;
+    stroke-width: 3px;
+}
+
+.call_rope_cross_thread {
+    stroke-dasharray: 3px;
+    stroke-width: 10px;
+}
+
+#div_cur_log_0 {
+    font-size: 20px;
+}
+
+#div_cur_log_1 {
+    font-size: 20px;
+}
+
+#div_cur_log_2 {
+    font-size: 15px;
+}

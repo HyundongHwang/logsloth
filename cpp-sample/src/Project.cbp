@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Project"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/hhd/project/logsloth/cpp-sample/src"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/hhd/project/logsloth/cpp-sample/src"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/hhd/project/logsloth/cpp-sample/src"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_app">
+				<Option output="/home/hhd/project/logsloth/cpp-sample/src/test_app" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/hhd/project/logsloth/cpp-sample/src"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/hhd/project/logsloth/cpp-sample/src/../thirdparty/gtest/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 test_app"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_app/fast">
+				<Option output="/home/hhd/project/logsloth/cpp-sample/src/test_app" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/hhd/project/logsloth/cpp-sample/src"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/hhd/project/logsloth/cpp-sample/src/../thirdparty/gtest/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 test_app/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_callstack_first_app">
+				<Option output="/home/hhd/project/logsloth/cpp-sample/src/test_callstack_first_app" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/hhd/project/logsloth/cpp-sample/src"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/hhd/project/logsloth/cpp-sample/src/../thirdparty/gtest/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 test_callstack_first_app"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_callstack_first_app/fast">
+				<Option output="/home/hhd/project/logsloth/cpp-sample/src/test_callstack_first_app" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/hhd/project/logsloth/cpp-sample/src"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/hhd/project/logsloth/cpp-sample/src/../thirdparty/gtest/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 test_callstack_first_app/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_enter_first_app">
+				<Option output="/home/hhd/project/logsloth/cpp-sample/src/test_enter_first_app" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/hhd/project/logsloth/cpp-sample/src"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/hhd/project/logsloth/cpp-sample/src/../thirdparty/gtest/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 test_enter_first_app"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_enter_first_app/fast">
+				<Option output="/home/hhd/project/logsloth/cpp-sample/src/test_enter_first_app" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/hhd/project/logsloth/cpp-sample/src"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/hhd/project/logsloth/cpp-sample/src/../thirdparty/gtest/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 test_enter_first_app/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/hhd/project/logsloth/cpp-sample/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/hhd/project/logsloth/cpp-sample/src/main.cpp">
+			<Option target="test_app"/>
+			<Option target="test_callstack_first_app"/>
+			<Option target="test_enter_first_app"/>
+		</Unit>
+		<Unit filename="/home/hhd/project/logsloth/cpp-sample/src/stdafx.cpp">
+			<Option target="test_app"/>
+			<Option target="test_callstack_first_app"/>
+			<Option target="test_enter_first_app"/>
+		</Unit>
+		<Unit filename="/home/hhd/project/logsloth/cpp-sample/src/stdafx.h">
+			<Option target="test_app"/>
+			<Option target="test_callstack_first_app"/>
+			<Option target="test_enter_first_app"/>
+		</Unit>
+		<Unit filename="/home/hhd/project/logsloth/cpp-sample/src/test.cpp">
+			<Option target="test_app"/>
+		</Unit>
+		<Unit filename="/home/hhd/project/logsloth/cpp-sample/src/test_callstack_first.cpp">
+			<Option target="test_callstack_first_app"/>
+		</Unit>
+		<Unit filename="/home/hhd/project/logsloth/cpp-sample/src/test_enter_first.cpp">
+			<Option target="test_enter_first_app"/>
+		</Unit>
+		<Unit filename="/home/hhd/project/logsloth/cpp-sample/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

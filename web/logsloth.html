@@ -1,0 +1,127 @@
+<!--file:///home/hhd/project/logsloth/web/logsloth.html?gitRepoArray=hyundong-hwang%253Alogsloth%253Amaster%252C%2520videocell-tech%253Aprism_pacman%253Amaster&logFilePath=http%3A%2F%2F10.105.64.25%3A8000%2Fv1%2Flogsloth%2F55c8ddbff1c6cc48ee019c36c1b228da.log-->
+<!-- https://pages.oss.AAA.com/hyundong-hwang/logsloth/logsloth.html?gitRepoArray=videocell-tech%253APRISMSDK-Android-Docs%253Alogsloth%252Fcheck_transcode_add&filterLogType=logsloth&filterStr=&filterViewOnlyEnterLogs=undefined -->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/androidstudio.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="logsloth.css">
+
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.10.0/js/md5.js"></script>
+    <script src="libs/jquery.html-svg-connect.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Base64/1.0.2/base64.js"></script>
+    <script src="logsloth.js"></script>
+</head>
+
+<body>
+
+<div id="panel_top">
+    <ul>
+        <li><a href="#tab_main">Main</a></li>
+        <li><a href="#tab_login">Login</a></li>
+        <li><a href="#tab_dev_tests">Dev tests</a></li>
+        <li><a href="#tab_filter">Filter</a></li>
+        <li><a href="#tab_empty">Empty</a></li>
+    </ul>
+    <div id="tab_main">
+        <div>
+            <label>Open log file : </label>
+            <input id="file_log" type="file"/>
+            <button id="btn_upload_log_file">Upload log file to nubes</button>
+        </div>
+        <div id="div_git_repo">
+            <label id="label_git_repo">Insert oss repo array : </label>
+            <input id="txt_git_repo_array" type="text"/>
+            <button id="btn_apply_oss_repo">Apply oss repo</button>
+        </div>
+        <div id="div_log_navigation">
+            <button id="btn_back">◀</button>
+            <input id="txt_log_line_number" type="text"/>
+            <button id="btn_forward">▶</button>
+            <span id="txt_loading_status">txt_loading_status</span>
+            <button id="btn_stop_load">Stop loading</button>
+        </div>
+    </div>
+
+
+    <div id="tab_login">
+        <div id="div_gitAccount_login">
+            <div>
+                <span>gitAccount.userName</span>
+                <input id="txt_gitAccount_userName" type="text"/>
+            </div>
+            <div>
+                <span>gitAccount.acessToken</span>
+                <input id="txt_gitAccount_acessToken" type="password"/>
+            </div>
+            <button id="btn_gitAccount_login">login</button>
+        </div>
+        <div id="div_gitAccount_logout">
+            <div id="div_gitAccount_info">div_gitAccount_info</div>
+            <button id="btn_gitAccount_logout">logout</button>
+        </div>
+    </div>
+    <div id="tab_dev_tests">
+    </div>
+    <div id="tab_filter">
+        <fieldset>
+            <label><input type="radio" name="radio_filter_log_type" value="logsloth" checked="checked"> View only LogSloth </label><br>
+            <label><input type="radio" name="radio_filter_log_type" value="logcat_logsloth"> View Logcat + LogSloth</label><br>
+            <label><input type="radio" name="radio_filter_log_type" value="all_log" > View any logs </label><br>
+        </fieldset>
+        <fieldset>
+            <label><input id="cb_filter_view_only_enter_logs" type="checkbox"/> View only enter logs </label><br>
+        </fieldset>
+        <fieldset id="fs_filter_tid">
+            <legend>Exclude filter threads</legend>
+        </fieldset>
+        <fieldset id="fs_filter_file_func">
+            <legend>Exclude filter function</legend>
+        </fieldset>
+        <div>
+            <span>Insert filter string : </span>
+            <input id="txt_filter_str" type="text"/>
+        </div>
+        <div>
+            <span>Insert log line number range : </span>
+            <input id="txt_filter_log_line_number_start" type="text"/>
+            <span> ~ </span>
+            <input id="txt_filter_log_line_number_finish" type="text"/>
+        </div>
+        <div>
+            <span>Insert max same log count : </span>
+            <input id="txt_max_same_log_count" type="text"/>
+        </div>
+        <button id="btn_apply_filter">Apply filter</button>
+    </div>
+</div>
+<div id="panel_left_top">
+    <div id="div_cur_log_0">div_cur_log_0</div>
+    <div id="div_cur_log_1">div_cur_log_1</div>
+    <div id="div_cur_log_2">div_cur_log_2</div>
+</div>
+<div id="panel_left">
+    <code id="code_src">code_src</code>
+    <div id="div_overlay_src"></div>
+</div>
+<div id="panel_right_top">
+    panel_right_top
+</div>
+<div id="panel_right">
+</div>
+</body>
+
+</html>
