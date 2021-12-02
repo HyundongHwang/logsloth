@@ -204,6 +204,7 @@ public class LogSloth {
         String methodName = null;
 
         if (_showFuncInfo) {
+            methodName = st.getMethodName();
             if (st.getMethodName().equals("invoke")) {
                 String[] tokenList = st.getClassName().split("\\$");
                 if (tokenList.length > 1) {

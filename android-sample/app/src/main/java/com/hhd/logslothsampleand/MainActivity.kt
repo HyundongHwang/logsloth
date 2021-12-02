@@ -9,7 +9,10 @@ import com.hhd.logsloth.LogSloth
 import com.hhd.logsloth.logsloth
 import com.hhd.logslothsampleand.util.MyActivityUtil
 import com.hhd.logslothsampleand.util.MyUtil
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class
 MainActivity : AppCompatActivity() {
@@ -43,15 +46,6 @@ MainActivity : AppCompatActivity() {
     }
 
     fun _00_simple_LogSloth() = logsloth {
-        LogSloth.init(
-            false,
-            false,
-            false,
-            false,
-            false,
-            Log.VERBOSE,
-        )
-
         LogSloth.d("hello world")
         LogSloth.caller("cmd123")
         repeat(5) {
@@ -78,6 +72,17 @@ MainActivity : AppCompatActivity() {
                 UseLogSloth().start()
             }
         }
+    }
+
+    fun _05_LogSloth_init_for_release() {
+        LogSloth.init(
+            false,
+            false,
+            true,
+            true,
+            false,
+            Log.VERBOSE,
+        )
     }
 }
 
