@@ -10,8 +10,6 @@ android {
         minSdk 21
         compileSdk 30
         targetSdk 30
-        versionCode 8
-        versionName "1.0.8"
     }
 
     buildTypes {
@@ -45,7 +43,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.jitpack'
                 artifactId = 'logsloth'
-                version = '1.0.8'
+                version = '1.0.9'
             }
         }
     }

@@ -2,6 +2,7 @@ package com.hhd.logslothsampleand
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.hhd.logsloth.LogSloth
@@ -10,7 +11,8 @@ import com.hhd.logslothsampleand.util.MyActivityUtil
 import com.hhd.logslothsampleand.util.MyUtil
 import kotlinx.coroutines.*
 
-class MainActivity : AppCompatActivity() {
+class
+MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -41,6 +43,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun _00_simple_LogSloth() = logsloth {
+        LogSloth.init(
+            false,
+            false,
+            false,
+            false,
+            false,
+            Log.VERBOSE,
+        )
+
         LogSloth.d("hello world")
         LogSloth.caller("cmd123")
         repeat(5) {

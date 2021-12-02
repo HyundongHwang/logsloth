@@ -20,6 +20,29 @@ public class LogSloth {
             new LsMediaFormatValueFormatter(),
     };
 
+    private static boolean _showFileInfo = true;
+    private static boolean _showLineInfo = true;
+    private static boolean _showFuncInfo = true;
+    private static boolean _showThreadName = true;
+    private static boolean _showStackTraceInfo = true;
+    private static int _logLevel = Log.VERBOSE;
+
+    public static void init(
+            boolean showFileInfo,
+            boolean showLineInfo,
+            boolean showFuncInfo,
+            boolean showThreadName,
+            boolean showStackTraceInfo,
+            int logLevel
+    ) {
+        _showFileInfo = showFileInfo;
+        _showLineInfo = showLineInfo;
+        _showFuncInfo = showFuncInfo;
+        _showThreadName = showThreadName;
+        _showStackTraceInfo = showStackTraceInfo;
+        _logLevel = logLevel;
+    }
+
     public static void enter() {
         LogSloth.writeLog(Log.DEBUG, "↘↘↘");
     }
@@ -141,7 +164,8 @@ public class LogSloth {
     }
 
     public static void exception(Exception ex) {
-        LogSloth.writeLog(Log.ERROR, Log.getStackTraceString(ex));
+        String log = _showStackTraceInfo ? Log.getStackTraceString(ex) : ex.toString();
+        LogSloth.writeLog(Log.ERROR, log);
     }
 
     public static void empty() {
@@ -152,6 +176,10 @@ public class LogSloth {
             int level,
             String strFormat,
             Object... args) {
+
+        if (level < _logLevel)
+            return;
+
 
         StackTraceElement[] stList = Thread.currentThread().getStackTrace();
         StackTraceElement st = null;
@@ -173,29 +201,40 @@ public class LogSloth {
         if (st == null)
             return;
 
-        String methodName = st.getMethodName();
+        String methodName = null;
 
-        if (st.getMethodName().equals("invoke")) {
-            String[] tokenList = st.getClassName().split("\\$");
-            if (tokenList.length > 1) {
-                methodName = st.getClassName().split("\\$")[1];
+        if (_showFuncInfo) {
+            if (st.getMethodName().equals("invoke")) {
+                String[] tokenList = st.getClassName().split("\\$");
+                if (tokenList.length > 1) {
+                    methodName = st.getClassName().split("\\$")[1];
+                }
             }
+        } else {
+            methodName = "M";
         }
 
+        String fileName = _showFileInfo ? st.getFileName() : "F";
+        int lineNum = _showLineInfo ? st.getLineNumber() : -1;
+        @SuppressLint("DefaultLocale")
+        String threadName = _showThreadName ? Thread.currentThread().getName() : String.format("T_%d", Thread.currentThread().getId());
+
         writeLog(level,
-                st.getFileName(),
-                st.getLineNumber(),
+                fileName,
+                lineNum,
                 methodName,
+                threadName,
                 strFormat,
                 args);
     }
 
     @SuppressLint("DefaultLocale")
-    public static void writeLog(
+    private static void writeLog(
             int level,
             String strFileName,
             int nLineNum,
             String strFuncName,
+            String threadName,
             String strFormat,
             Object... args) {
 
@@ -213,7 +252,7 @@ public class LogSloth {
                 strFileName,
                 nLineNum,
                 strFuncName,
-                Thread.currentThread().getName(),
+                threadName,
                 strLog);
 
         switch (level) {
