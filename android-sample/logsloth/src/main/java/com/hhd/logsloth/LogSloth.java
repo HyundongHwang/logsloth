@@ -163,13 +163,12 @@ public class LogSloth {
         LogSloth.writeLog(Log.VERBOSE, strFormat, args);
     }
 
-    public static void exception(Exception ex) {
-        String log = _showStackTraceInfo ? Log.getStackTraceString(ex) : ex.toString();
-        LogSloth.writeLog(Log.ERROR, log);
-    }
+    public static void writeLog(
+            int level,
+            Throwable tr) {
 
-    public static void empty() {
-        LogSloth.writeLog(Log.DEBUG, "");
+        String log = _showStackTraceInfo ? Log.getStackTraceString(tr) : tr.toString();
+        writeLog(level, log);
     }
 
     public static void writeLog(
