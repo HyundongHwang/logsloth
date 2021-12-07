@@ -44,11 +44,11 @@ public class LogSloth {
     }
 
     public static void enter() {
-        LogSloth.writeLog(Log.DEBUG, "↘↘↘");
+        LogSloth.printLog(Log.DEBUG, null, "↘↘↘");
     }
 
     public static void leave() {
-        LogSloth.writeLog(Log.DEBUG, "↗↗↗");
+        LogSloth.printLog(Log.DEBUG, null, "↗↗↗");
     }
 
     public static void value(String valueDesc, Object value) {
@@ -88,7 +88,7 @@ public class LogSloth {
         }
 
         String logStr = String.format("%s:::%s", valueDesc, valueStr);
-        LogSloth.writeLog(Log.DEBUG, logStr);
+        LogSloth.printLog(Log.DEBUG, null, logStr);
     }
 
     public static void caller(Object callParam) {
@@ -114,7 +114,7 @@ public class LogSloth {
         }
 
         String logStr = String.format("→→→%s→→→", callParamStr);
-        LogSloth.writeLog(Log.DEBUG, logStr);
+        LogSloth.printLog(Log.DEBUG, null, logStr);
     }
 
     public static void callee(Object callParam) {
@@ -140,45 +140,37 @@ public class LogSloth {
         }
 
         String logStr = String.format("←←←%s←←←", callParamStr);
-        LogSloth.writeLog(Log.DEBUG, logStr);
+        LogSloth.printLog(Log.DEBUG, null, logStr);
     }
 
     public static void d(String strFormat, Object... args) {
-        LogSloth.writeLog(Log.DEBUG, strFormat, args);
+        LogSloth.printLog(Log.DEBUG, null, strFormat, args);
     }
 
     public static void w(String strFormat, Object... args) {
-        LogSloth.writeLog(Log.WARN, strFormat, args);
+        LogSloth.printLog(Log.WARN, null, strFormat, args);
     }
 
     public static void e(String strFormat, Object... args) {
-        LogSloth.writeLog(Log.ERROR, strFormat, args);
+        LogSloth.printLog(Log.ERROR, null, strFormat, args);
     }
 
     public static void i(String strFormat, Object... args) {
-        LogSloth.writeLog(Log.INFO, strFormat, args);
+        LogSloth.printLog(Log.INFO, null, strFormat, args);
     }
 
     public static void v(String strFormat, Object... args) {
-        LogSloth.writeLog(Log.VERBOSE, strFormat, args);
+        LogSloth.printLog(Log.VERBOSE, null, strFormat, args);
     }
 
-    public static void writeLog(
+    public static void printLog(
             int level,
-            Throwable tr) {
-
-        String log = _showStackTraceInfo ? Log.getStackTraceString(tr) : tr.toString();
-        writeLog(level, log);
-    }
-
-    public static void writeLog(
-            int level,
+            Throwable tr,
             String strFormat,
             Object... args) {
 
         if (level < _logLevel)
             return;
-
 
         StackTraceElement[] stList = Thread.currentThread().getStackTrace();
         StackTraceElement st = null;
@@ -219,31 +211,38 @@ public class LogSloth {
         @SuppressLint("DefaultLocale")
         String threadName = _showThreadName ? Thread.currentThread().getName() : String.format("T_%d", Thread.currentThread().getId());
 
-        writeLog(level,
+        printLog(level,
                 fileName,
                 lineNum,
                 methodName,
                 threadName,
+                tr,
                 strFormat,
                 args);
     }
 
     @SuppressLint("DefaultLocale")
-    private static void writeLog(
+    private static void printLog(
             int level,
             String strFileName,
             int nLineNum,
             String strFuncName,
             String threadName,
+            Throwable tr,
             String strFormat,
             Object... args) {
 
         String strLog = "";
 
         if (args != null && args.length > 0) {
-            strLog = String.format(strFormat, args);
+            strLog += String.format(strFormat, args);
         } else {
-            strLog = strFormat == null ? "" : strFormat;
+            strLog += strFormat == null ? "" : strFormat;
+        }
+
+        if (tr != null) {
+            strLog += "\n";
+            strLog += _showStackTraceInfo ? Log.getStackTraceString(tr) : tr.toString();
         }
 
 //        strLog = strLog.replace("\n", "↓↓↓");
