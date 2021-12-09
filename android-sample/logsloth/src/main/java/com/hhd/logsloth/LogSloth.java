@@ -12,7 +12,7 @@ import com.hhd.logsloth.valueformatter.LsMediaFormatValueFormatter;
 public class LogSloth {
 
     private static final String TAG = "LOGSLOTH";
-    private static final String[] _INTERNAL_FILE_LIST = {"VMStack.java", "Thread.java", "LogSloth.java", "LogSloth.kt"};
+    private static final String[] _INTERNAL_FILE_LIST = {"VMStack.java", "Thread.java", "LogSloth.java", "LogSloth.kt", "FlavorCommon.kt"};
     private static final IValueFormatter[] _VALUE_FORMATTER_ARRAY = new IValueFormatter[]{
             new LsBufferInfoValueFormatter(),
             new LsByteArrayValueFormatter(),
