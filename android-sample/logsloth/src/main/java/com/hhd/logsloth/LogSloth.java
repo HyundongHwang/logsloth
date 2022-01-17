@@ -189,25 +189,30 @@ public class LogSloth {
             }
         }
 
-        if (st == null)
-            return;
+        String methodName = "M";
+        String fileName = "F";
+        int lineNum = -1;
 
-        String methodName = null;
-
-        if (_showFuncInfo) {
-            methodName = st.getMethodName();
-            if ("invoke".equals(st.getMethodName())) {
-                String[] tokenList = st.getClassName().split("\\$");
-                if (tokenList.length > 1) {
-                    methodName = st.getClassName().split("\\$")[1];
+        if (st != null) {
+            if (_showFuncInfo) {
+                methodName = st.getMethodName();
+                if ("invoke".equals(st.getMethodName())) {
+                    String[] tokenList = st.getClassName().split("\\$");
+                    if (tokenList.length > 1) {
+                        methodName = st.getClassName().split("\\$")[1];
+                    }
                 }
             }
-        } else {
-            methodName = "M";
+
+            if (_showFileInfo) {
+                fileName = st.getFileName();
+            }
+
+            if (_showLineInfo) {
+                lineNum = st.getLineNumber();
+            }
         }
 
-        String fileName = _showFileInfo ? st.getFileName() : "F";
-        int lineNum = _showLineInfo ? st.getLineNumber() : -1;
         @SuppressLint("DefaultLocale")
         String threadName = _showThreadName ? Thread.currentThread().getName() : String.format("T_%d", Thread.currentThread().getId());
 
