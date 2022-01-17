@@ -187,7 +187,7 @@ public class LogSloth {
         for (StackTraceElement item : stList) {
             boolean isInFile = false;
             for (String inFileName : _INTERNAL_FILE_LIST) {
-                if (item.getFileName().equals(inFileName)) {
+                if (inFileName.equals(item.getFileName())) {
                     isInFile = true;
                     break;
                 }
@@ -205,7 +205,7 @@ public class LogSloth {
 
         if (_showFuncInfo) {
             methodName = st.getMethodName();
-            if (st.getMethodName().equals("invoke")) {
+            if ("invoke".equals(st.getMethodName())) {
                 String[] tokenList = st.getClassName().split("\\$");
                 if (tokenList.length > 1) {
                     methodName = st.getClassName().split("\\$")[1];
