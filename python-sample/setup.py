@@ -4,12 +4,19 @@ import setuptools
 
 setuptools.setup(
     name='logsloth',
-    version='1.0.3',
+    version='1.0.5',
     description='logsloth.py python logger',
     author='hhd2002',
     author_email='h2d2002@naver.com',
     url='https://github.com/HyundongHwang/logsloth',
-    install_requires=[],
+    install_requires=[
+        "colorama",
+        "numpy",
+        "pandas",
+        "requests",
+        "tabulate",
+        "threaded",
+    ],
     packages=setuptools.find_packages(),
     keywords=['logsloth.py', 'hhd2002', 'utility'],
     python_requires='>=3',
@@ -26,6 +33,6 @@ setuptools.setup(
 # python setup.py bdist_wheel;
 # twine upload dist/*.whl;
 # ;
-# pip install -U hellologsloth;
-# pip install -U hellologsloth;
-# pip show hellologsloth;
+# pip install -U logsloth;
+# pip install -U logsloth;
+# pip show logsloth;

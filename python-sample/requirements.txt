@@ -1,0 +1,6 @@
+colorama
+numpy
+pandas
+requests
+tabulate
+threaded

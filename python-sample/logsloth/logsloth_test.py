@@ -1,21 +1,28 @@
 # -*- coding: utf-8 -*-
 
-import logsloth
+from logsloth import LogSloth
 
 
 class LogSlothTest:
-    @logsloth.fun_scope
+    @LogSloth.fun_scope
     def test_basic(self):
-        logsloth.d("hello")
-        logsloth.caller("cmd123")
+        LogSloth.d("hello")
+        LogSloth.caller("cmd123")
 
         for _ in range(5):
-            logsloth.d("work ...")
+            LogSloth.d("work ...")
 
-        logsloth.callee("cmd123")
-        logsloth.d("world")
+        LogSloth.callee("cmd123")
+        LogSloth.d("world")
+
+        my_dic = {}
+        my_dic["a"] = 123
+        my_dic["456"] = "bcd"
+        my_dic["efg"] = 7.8
+        LogSloth.d(f"my_dic:\n{LogSloth.to_str(my_dic)}")
 
 
 if __name__ == '__main__':
-    logsloth.init(show_color=True)
+    LogSloth.show_color = True
+    LogSloth.use_detail_foramt = False
     LogSlothTest().test_basic()
