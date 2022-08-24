@@ -1,22 +1,26 @@
 # -*- coding: utf-8 -*-
 
+
+from datetime import datetime, timedelta
+from enum import Enum, auto
 import colorama
 import inspect
+import json
 import numpy as np
 import os
 import pandas as pd
 import tabulate as tb
 import threading
 import time
-import json
 
-from datetime import datetime, timedelta
-from enum import Enum, auto
+from ls_color_selector import *
+from ls_hook_base import *
 
 
 class LogSloth:
     show_color = True
     use_detail_foramt = False
+    _hook_list = []
 
     _STACK_FILETER_OUT_WORD_LIST = [
         "/logsloth.py",
@@ -29,6 +33,10 @@ class LogSloth:
         "Timestamp",
         "etag",
     ]
+
+    @staticmethod
+    def add_hook(hook: LsHookBase):
+        LogSloth._hook_list.append(hook)
 
     @staticmethod
     def _print_log(log, file_name=None, line_num=None, func_name=None):
@@ -91,6 +99,18 @@ class LogSloth:
             full_log += f"{colorama.Fore.RESET}{log}"
 
         print(full_log)
+
+        for hook in LogSloth._hook_list:
+            hook: LsHookBase = hook
+
+            hook.on_log(
+                dt_now=now,
+                now_date_time=now_date_time,
+                file_name=file_name,
+                line_num=line_num,
+                func_name=func_name,
+                log=log,
+            )
 
     @staticmethod
     def d(log):
@@ -298,32 +318,6 @@ class LogSloth:
         new_line_list = new_line_list[:100]
         res_str = "\n".join(new_line_list)
         return res_str
-
-
-class LsColorSelector:
-    _COLOR_LIST = [
-        colorama.Fore.RED,
-        colorama.Fore.GREEN,
-        colorama.Fore.YELLOW,
-        colorama.Fore.BLUE,
-        colorama.Fore.MAGENTA,
-        colorama.Fore.CYAN,
-        colorama.Fore.LIGHTBLACK_EX,
-        colorama.Fore.LIGHTRED_EX,
-        colorama.Fore.LIGHTGREEN_EX,
-        colorama.Fore.LIGHTYELLOW_EX,
-        colorama.Fore.LIGHTBLUE_EX,
-        colorama.Fore.LIGHTMAGENTA_EX,
-        colorama.Fore.LIGHTCYAN_EX,
-    ]
-
-    def __init__(self):
-        self._idx = 0
-
-    def next(self):
-        clr = self._COLOR_LIST[self._idx]
-        self._idx = (self._idx + 1) % len(LsColorSelector._COLOR_LIST)
-        return clr
 
 
 if __name__ == '__main__':

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from logsloth import LogSloth
+from logsloth import *
+from ls_hook_base import *
 
 
 class LogSlothTest:
@@ -22,7 +23,13 @@ class LogSlothTest:
         LogSloth.d(f"my_dic:\n{LogSloth.to_str(my_dic)}")
 
 
+class MyHook(LsHookBase):
+    def on_log(self, dt_now: datetime, now_date_time: str, file_name: str, line_num: int, func_name: str, log: str):
+        print(f"on_log")
+
+
 if __name__ == '__main__':
     LogSloth.show_color = True
     LogSloth.use_detail_foramt = False
+    LogSloth.add_hook(MyHook())
     LogSlothTest().test_basic()

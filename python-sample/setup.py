@@ -4,7 +4,7 @@ import setuptools
 
 setuptools.setup(
     name='logsloth',
-    version='1.0.5',
+    version='1.0.6',
     description='logsloth.py python logger',
     author='hhd2002',
     author_email='h2d2002@naver.com',
