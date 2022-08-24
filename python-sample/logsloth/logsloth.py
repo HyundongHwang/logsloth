@@ -13,8 +13,12 @@ import tabulate as tb
 import threading
 import time
 
-from ls_color_selector import *
-from ls_hook_base import *
+try:
+    from ls_color_selector import *
+    from ls_hook_base import *
+except Exception as ex:
+    from .ls_color_selector import *
+    from .ls_hook_base import *
 
 
 class LogSloth:

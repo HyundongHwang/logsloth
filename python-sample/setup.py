@@ -4,7 +4,7 @@ import setuptools
 
 setuptools.setup(
     name='logsloth',
-    version='1.0.6',
+    version='1.0.7',
     description='logsloth.py python logger',
     author='hhd2002',
     author_email='h2d2002@naver.com',
@@ -29,10 +29,10 @@ setuptools.setup(
     },
 )
 
-# rm -rf build dist *.egg-info;
-# python setup.py bdist_wheel;
-# twine upload dist/*.whl;
-# ;
-# pip install -U logsloth;
-# pip install -U logsloth;
-# pip show logsloth;
+# rm -rf build dist *.egg-info
+# python setup.py bdist_wheel
+# twine upload dist/*.whl
+#
+# pip install -U logsloth
+# pip install -U logsloth
+# pip show logsloth

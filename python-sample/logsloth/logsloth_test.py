@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from logsloth import *
-from ls_hook_base import *
+
+try:
+    from logsloth import *
+    from ls_hook_base import *
+except Exception as ex:
+    from .logsloth import *
+    from .ls_hook_base import *
 
 
 class LogSlothTest:
