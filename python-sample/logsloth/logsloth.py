@@ -12,6 +12,7 @@ import pandas as pd
 import tabulate as tb
 import threading
 import time
+import maya
 
 try:
     from ls_color_selector import *
@@ -24,6 +25,7 @@ except Exception as ex:
 class LogSloth:
     show_color = True
     use_detail_foramt = False
+    timezone = "Asia/Seoul"  # UTC, America/New_York
     _hook_list = []
 
     _STACK_FILETER_OUT_WORD_LIST = [
@@ -58,11 +60,11 @@ class LogSloth:
         pid = os.getpid()
         tid = threading.current_thread().native_id
         tname = threading.current_thread().name
-        now = datetime.now()
-        now_date = now.strftime("%m-%d")
-        now_time = now.strftime("%H%M%S")
-        now_ms = now.strftime("%f")[:3]
-        now_date_time = now.strftime("%y%m%d_%H%M%S")
+        now_dt = maya.now().datetime(to_timezone=LogSloth.timezone, naive=False)
+        now_date = now_dt.strftime("%m-%d")
+        now_time = now_dt.strftime("%H%M%S")
+        now_ms = now_dt.strftime("%f")[:3]
+        now_dt_str = now_dt.strftime("%y%m%d_%H%M%S")
 
         if file_name is None:
             st_list = inspect.stack()
@@ -96,7 +98,7 @@ class LogSloth:
             full_log += f"{clr.next()}{tname} "
             full_log += f"{colorama.Fore.RESET}{log}"
         else:
-            full_log += f"{clr.next()}{now_date_time} "
+            full_log += f"{clr.next()}{now_dt_str} "
             full_log += f"{clr.next()}{file_name}:"
             full_log += f"{clr.next()}{line_num}:"
             full_log += f"{clr.next()}{func_name} "
@@ -108,8 +110,8 @@ class LogSloth:
             hook: LsHookBase = hook
 
             hook.on_log(
-                dt_now=now,
-                now_date_time=now_date_time,
+                now_dt=now_dt,
+                now_dt_str=now_dt_str,
                 file_name=file_name,
                 line_num=line_num,
                 func_name=func_name,

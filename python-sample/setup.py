@@ -4,7 +4,7 @@ import setuptools
 
 setuptools.setup(
     name='logsloth',
-    version='1.0.7',
+    version='1.0.8',
     description='logsloth.py python logger',
     author='hhd2002',
     author_email='h2d2002@naver.com',
@@ -16,6 +16,7 @@ setuptools.setup(
         "requests",
         "tabulate",
         "threaded",
+        "maya",
     ],
     packages=setuptools.find_packages(),
     keywords=['logsloth.py', 'hhd2002', 'utility'],
