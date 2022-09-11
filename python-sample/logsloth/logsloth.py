@@ -15,7 +15,7 @@ class LogSloth:
     _STACK_FILETER_OUT_WORD_LIST = [
         "/logsloth.py",
         "/unittest/",
-        "/plugins/"
+        "/plugins/",
     ]
 
     _TO_STR_HIDDEN_COLUMN_LIST = [
@@ -56,11 +56,15 @@ class LogSloth:
             for st in st_list:
                 is_my_stack = True
                 for w in LogSloth._STACK_FILETER_OUT_WORD_LIST:
-                    if w in st.filename:
+                    st_filename = st.filename;
+                    st_filename = st_filename.replace("\\", "/")
+                    if w in st_filename:
                         is_my_stack = False
                         break
                 if is_my_stack:
-                    file_name = st.filename.split("/")[-1]
+                    st_filename = st.filename;
+                    st_filename = st_filename.replace("\\", "/")
+                    file_name = st_filename.split("/")[-1]
                     line_num = st.lineno
                     func_name = st.function
                     break
