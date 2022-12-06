@@ -234,13 +234,13 @@ class LogSloth:
             for k in dict_value:
                 if type(k) is str and k.startswith("__"):
                     continue
-                if value.get(k) is None:
+                if dict_value.get(k) is None:
                     continue
                 if k in LogSloth._TO_STR_HIDDEN_COLUMN_LIST:
                     continue
                 t_list.append({
                     "key": k,
-                    "value": value[k],
+                    "value": dict_value[k],
                 })
             df = pd.DataFrame(t_list)
 
