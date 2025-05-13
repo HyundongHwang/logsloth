@@ -70,6 +70,7 @@ class LogSloth:
                     break
 
         clr = LsColorSelector()
+        clr.show_color = LogSloth.show_color
         full_log = f""
 
         if LogSloth.use_detail_foramt:
@@ -92,7 +93,7 @@ class LogSloth:
             full_log += f"{clr.next()}{func_name} "
             full_log += f"{colorama.Fore.RESET}{log}"
 
-        print(full_log)
+        print(full_log, flush=True)
 
         for hook in LogSloth._hook_list:
             hook: LsHookBase = hook
@@ -244,7 +245,7 @@ class LogSloth:
                 })
             df = pd.DataFrame(t_list)
 
-        df = df.applymap(func=LogSloth._str_format_for_tabulate)
+        df = df.map(func=LogSloth._str_format_for_tabulate)
 
         if select is not None:
             col_list = [col.strip() for col in select.split(",")]

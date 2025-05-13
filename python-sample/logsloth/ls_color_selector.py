@@ -22,9 +22,17 @@ class LsColorSelector:
     ]
 
     def __init__(self):
+        self.show_color: bool = True
         self._idx = 0
 
-    def next(self):
+    def next(self) -> str:
+        if not self.show_color:
+            return ""
         clr = self._COLOR_LIST[self._idx]
         self._idx = (self._idx + 1) % len(LsColorSelector._COLOR_LIST)
         return clr
+
+    def reset(self):
+        if not self.show_color:
+            return ""
+        return colorama.Fore.RESET

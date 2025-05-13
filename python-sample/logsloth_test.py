@@ -30,7 +30,7 @@ class MyHook(LsHookBase):
 
 
 if __name__ == '__main__':
-    LogSloth.show_color = True
+    LogSloth.show_color = False
     LogSloth.use_detail_foramt = False
     LogSloth.add_hook(MyHook())
     LogSlothTest().test_basic()
