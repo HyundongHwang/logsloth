@@ -1,4 +1,4 @@
 jdk:
   - openjdk11
 before_install:
-  - cd android-sample/logsloth
+  - cd android-sample
