@@ -9,6 +9,7 @@ import maya
 import numpy as np
 import os
 import pandas as pd
+import re
 import setuptools
 import sys
 import tabulate as tb
