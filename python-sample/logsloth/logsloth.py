@@ -100,7 +100,7 @@ class LogSloth:
             full_log += f"{clr.next()}{line_num}:"
             full_log += f"{clr.next()}{func_name} "
 
-        log_item_list = re.split(r"([_: ])", str(log))
+        log_item_list = re.split(r"([: ])", str(log))
         for log_item in log_item_list:
             if log_item == "":
                 continue
