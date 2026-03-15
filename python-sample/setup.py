@@ -1,14 +1,12 @@
-# -*- coding: utf-8 -*-
-
 import setuptools
 
 setuptools.setup(
-    name='logsloth',
-    version='1.1.2',
-    description='logsloth.py python logger',
-    author='hhd2002',
-    author_email='h2d2002@naver.com',
-    url='https://github.com/HyundongHwang/logsloth',
+    name="logsloth",
+    version="1.1.8",
+    description="logsloth.py python logger",
+    author="hhd2002",
+    author_email="h2d2002@naver.com",
+    url="https://github.com/HyundongHwang/logsloth",
     install_requires=[
         "colorama",
         "numpy",
@@ -19,8 +17,8 @@ setuptools.setup(
         "maya",
     ],
     packages=setuptools.find_packages(),
-    keywords=['logsloth.py', 'hhd2002', 'utility'],
-    python_requires='>=3',
+    keywords=["logsloth.py", "hhd2002", "utility"],
+    python_requires=">=3",
     package_data={},
     zip_safe=False,
     entry_points={
