@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-
+import re
 
 from .common_import import *
 from .ls_color_selector import *
@@ -8,15 +7,18 @@ from .ls_hook_base import *
 
 class LogSloth:
     show_color = True
+    use_detail_format = False
     use_detail_foramt = False
     timezone = "Asia/Seoul"  # UTC, America/New_York
     _hook_list = []
+    _old_print_log_ts = None
 
-    _STACK_FILETER_OUT_WORD_LIST = [
+    _STACK_FILTER_OUT_WORD_LIST = [
         "/logsloth.py",
         "/unittest/",
         "/plugins/",
     ]
+    _STACK_FILETER_OUT_WORD_LIST = _STACK_FILTER_OUT_WORD_LIST
 
     _TO_STR_HIDDEN_COLUMN_LIST = [
         "PartitionKey",
@@ -29,7 +31,7 @@ class LogSloth:
         LogSloth._hook_list.append(hook)
 
     @staticmethod
-    def _print_log(log, file_name=None, line_num=None, func_name=None):
+    def _print_log(log, file_name=None, line_num=None, func_name=None, throttle_sec=0):
         # 08-28 14:01:51.835  9531  9531 D LOGSLOTH: MainActivity.kt:43:_00_simple_LogSloth main ↘↘↘
         # 08-28 14:01:51.835  9531  9531 D LOGSLOTH: MainActivity.kt:44:_00_simple_LogSloth main hello world
         # 08-28 14:01:51.835  9531  9531 D LOGSLOTH: MainActivity.kt:45:_00_simple_LogSloth main →→→cmd123→→→
@@ -55,25 +57,32 @@ class LogSloth:
 
             for st in st_list:
                 is_my_stack = True
-                for w in LogSloth._STACK_FILETER_OUT_WORD_LIST:
-                    st_filename = st.filename;
+                for w in LogSloth._STACK_FILTER_OUT_WORD_LIST:
+                    st_filename = st.filename
                     st_filename = st_filename.replace("\\", "/")
                     if w in st_filename:
                         is_my_stack = False
                         break
                 if is_my_stack:
-                    st_filename = st.filename;
+                    st_filename = st.filename
                     st_filename = st_filename.replace("\\", "/")
                     file_name = st_filename.split("/")[-1]
                     line_num = st.lineno
                     func_name = st.function
                     break
 
+        if throttle_sec > 0:
+            now_ts = time.monotonic()
+            old_ts = LogSloth._old_print_log_ts
+            if old_ts is not None and now_ts - old_ts < throttle_sec:
+                return
+            LogSloth._old_print_log_ts = now_ts
+
         clr = LsColorSelector()
         clr.show_color = LogSloth.show_color
-        full_log = f""
+        full_log = ""
 
-        if LogSloth.use_detail_foramt:
+        if LogSloth.use_detail_format or LogSloth.use_detail_foramt:
             full_log += f"{clr.next()}{now_date} "
             full_log += f"{clr.next()}{now_time}."
             full_log += f"{clr.next()}{now_ms} "
@@ -85,13 +94,19 @@ class LogSloth:
             full_log += f"{clr.next()}{line_num}:"
             full_log += f"{clr.next()}{func_name} "
             full_log += f"{clr.next()}{tname} "
-            full_log += f"{colorama.Fore.RESET}{log}"
         else:
             full_log += f"{clr.next()}{now_dt_str} "
             full_log += f"{clr.next()}{file_name}:"
             full_log += f"{clr.next()}{line_num}:"
             full_log += f"{clr.next()}{func_name} "
-            full_log += f"{colorama.Fore.RESET}{log}"
+
+        log_item_list = re.split(r"([_: ])", str(log))
+        for log_item in log_item_list:
+            if log_item == "":
+                continue
+            full_log += f"{clr.next()}{log_item}"
+
+        full_log += clr.reset()
 
         print(full_log, flush=True)
 
@@ -108,33 +123,38 @@ class LogSloth:
             )
 
     @staticmethod
-    def d(log):
-        LogSloth._print_log(log)
+    def d(log, throttle_sec=0):
+        LogSloth._print_log(log, throttle_sec=throttle_sec)
 
     @staticmethod
     def value(name, value):
         clr = LsColorSelector()
-        LogSloth._print_log(f"{clr.next()}{name}{clr.next()}:::{clr.next()}{value}{colorama.Fore.RESET}")
+        clr.show_color = LogSloth.show_color
+        LogSloth._print_log(f"{clr.next()}{name}{clr.next()}:::{clr.next()}{value}{clr.reset()}")
 
     @staticmethod
     def enter():
         clr = LsColorSelector()
-        LogSloth._print_log(f"{clr.next()}↘↘↘{colorama.Fore.RESET}")
+        clr.show_color = LogSloth.show_color
+        LogSloth._print_log(f"{clr.next()}↘↘↘{clr.reset()}")
 
     @staticmethod
     def leave():
         clr = LsColorSelector()
-        LogSloth._print_log(f"{clr.next()}↗↗↗{colorama.Fore.RESET}")
+        clr.show_color = LogSloth.show_color
+        LogSloth._print_log(f"{clr.next()}↗↗↗{clr.reset()}")
 
     @staticmethod
     def caller(anchor_name):
         clr = LsColorSelector()
-        LogSloth._print_log(f"{clr.next()}→→→{clr.next()}{anchor_name}{clr.next()}→→→{colorama.Fore.RESET}")
+        clr.show_color = LogSloth.show_color
+        LogSloth._print_log(f"{clr.next()}→→→{clr.next()}{anchor_name}{clr.next()}→→→{clr.reset()}")
 
     @staticmethod
     def callee(anchor_name):
         clr = LsColorSelector()
-        LogSloth._print_log(f"{clr.next()}←←←{clr.next()}{anchor_name}{clr.next()}←←←{colorama.Fore.RESET}")
+        clr.show_color = LogSloth.show_color
+        LogSloth._print_log(f"{clr.next()}←←←{clr.next()}{anchor_name}{clr.next()}←←←{clr.reset()}")
 
     @staticmethod
     def fun_scope(func, *args, **kwargs):
@@ -145,30 +165,30 @@ class LogSloth:
 
         for st in st_list:
             is_my_stack = True
-            for w in LogSloth._STACK_FILETER_OUT_WORD_LIST:
-                if w in st.filename:
+            for w in LogSloth._STACK_FILTER_OUT_WORD_LIST:
+                st_filename = st.filename.replace("\\", "/")
+                if w in st_filename:
                     is_my_stack = False
                     break
             if is_my_stack:
-                file_name = st.filename.split("/")[-1]
+                file_name = st_filename.split("/")[-1]
                 line_num = st.lineno
                 break
 
         def func_wrapper(*args, **kwargs):
             clr = LsColorSelector()
-            LogSloth._print_log(f"{clr.next()}↘↘↘{colorama.Fore.RESET}", file_name, line_num, func_name)
+            clr.show_color = LogSloth.show_color
+            LogSloth._print_log(f"{clr.next()}↘↘↘{clr.reset()}", file_name, line_num, func_name)
             func(*args, **kwargs)
             clr = LsColorSelector()
-            LogSloth._print_log(f"{clr.next()}↗↗↗{colorama.Fore.RESET}", file_name, line_num, func_name)
+            clr.show_color = LogSloth.show_color
+            LogSloth._print_log(f"{clr.next()}↗↗↗{clr.reset()}", file_name, line_num, func_name)
 
         return func_wrapper
 
     @staticmethod
     def to_str(value, select=None):
-        if value is None or \
-                isinstance(value, int) or \
-                isinstance(value, float) or \
-                isinstance(value, str):
+        if value is None or isinstance(value, int) or isinstance(value, float) or isinstance(value, str):
             return str(value)
 
         res_str = None
@@ -178,7 +198,7 @@ class LogSloth:
             res_str = f"{value} \n"
             for key in value.state_dict():
                 param = value.state_dict()[key]
-                data_str = "{}".format(param.data)
+                data_str = f"{param.data}"
                 if len(data_str) > 100:
                     data_str = data_str[:100] + " ..."
                 res_str += f"{key}    {param.shape}\n    {data_str}\n"
@@ -198,10 +218,7 @@ class LogSloth:
             dict_item_list = []
             for item in value:
                 item_type_str = str(type(item))
-                if item is None or \
-                        isinstance(item, int) or \
-                        isinstance(item, float) or \
-                        isinstance(item, str):
+                if item is None or isinstance(item, int) or isinstance(item, float) or isinstance(item, str):
                     dict_item_list.append(str(item))
                 elif isinstance(item, dict):
                     dict_item_list.append(item)
@@ -239,10 +256,12 @@ class LogSloth:
                     continue
                 if k in LogSloth._TO_STR_HIDDEN_COLUMN_LIST:
                     continue
-                t_list.append({
-                    "key": k,
-                    "value": dict_value[k],
-                })
+                t_list.append(
+                    {
+                        "key": k,
+                        "value": dict_value[k],
+                    }
+                )
             df = pd.DataFrame(t_list)
 
         df = df.map(func=LogSloth._str_format_for_tabulate)
@@ -251,7 +270,7 @@ class LogSloth:
             col_list = [col.strip() for col in select.split(",")]
             df = df[col_list]
 
-        res_str = tb.tabulate(df, headers='keys', tablefmt='psql')
+        res_str = tb.tabulate(df, headers="keys", tablefmt="psql")
         return res_str
 
     @staticmethod
@@ -315,5 +334,5 @@ class LogSloth:
         return res_str
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     breakpoint()
